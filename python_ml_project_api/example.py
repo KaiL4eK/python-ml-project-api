@@ -5,6 +5,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+
 def hello(name: str) -> str:
     """
     Just an greetings example.

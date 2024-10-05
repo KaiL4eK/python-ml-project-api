@@ -24,36 +24,24 @@ classifiers = [  #! Update me
   "Programming Language :: Python :: 3",
 ]
 
-
-
-
-
 [tool.poetry.dependencies]
-python = "~3.9.0"
-typer = {extras = ["all"], version = "^0.9.0"}
-rich = "^10.7.0"
-python-dotenv = "^0.21.1"
+python = ">=3.10.0,<4.0"
+fastapi = "^0.115.0"
+uvicorn = "^0.31.0"
+celery = "^5.4.0"
+redis = "^5.1.1"
+pydantic = "^2.9.2"
+pydantic-settings = "^2.5.2"
+numpy = "^2.1.0"
 
 [tool.poetry.group.dev.dependencies]
 # In case of packages without patch part we just want to update them through minor versions
-
-
-
-
 ruff = "^0.6"
 mypy = "^1.8"
 mypy-extensions = "^1.0"
 pre-commit = "^2.14"
 pytest = "^6.2"
-nbdime = "^3.1.0"
-envyaml = "^1.9.210927"
-ipykernel = "^6.4.2"
-jupyter = "^1.0.0"
-jupyter_contrib_nbextensions = "^0.5.1"
-jupyter-client = "==6.1.12"
-nbconvert = "5.6.1"
-jinja2 = "3.0.3"
-
+watchfiles = "^0.24.0"
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
@@ -148,14 +136,9 @@ docstring-code-format = false
 # enabled.
 docstring-code-line-length = "dynamic"
 
-
-
-
-
-
 [tool.mypy]
 # https://mypy.readthedocs.io/en/latest/config_file.html#using-a-pyproject-toml-file
-python_version = "3.9"
+python_version = "3.10"
 pretty = true
 show_traceback = true
 color_output = true
@@ -178,7 +161,6 @@ warn_return_any = true
 warn_unreachable = true
 warn_unused_configs = true
 warn_unused_ignores = true
-
 
 [tool.pytest.ini_options]
 # https://docs.pytest.org/en/6.2.x/customize.html#pyproject-toml

@@ -20,6 +20,8 @@ This is guide how to prepare development environment and use main tools
 - [Python](docs/TOOLS.md#python)
 - [Poetry](docs/TOOLS.md#poetry)
 - [Make](docs/TOOLS.md#make)
+- Install some dependencies
+  - `sudo apt install python3.9-distutils`
 
 ## Initialize your code
 

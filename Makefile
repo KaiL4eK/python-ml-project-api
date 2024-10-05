@@ -2,8 +2,6 @@
 SHELL := /usr/bin/env bash
 PYTHON ?= python3
 
-
-
 #* Initialization
 .PHONY: project-init
 project-init: poetry-install tools-install mypy-install
@@ -28,7 +26,6 @@ poetry-export-dev:
 .PHONY: tools-install
 tools-install:
 	poetry run pre-commit install --hook-type prepare-commit-msg --hook-type pre-commit
-	poetry run nbdime config-git --enable
 
 .PHONY: pre-commit-update
 pre-commit-update:
@@ -69,9 +66,14 @@ build-remove:
 	rm -rf build/
 
 .PHONY: clean-all
-clean-all: pycache-remove build-remove 
+clean-all: pycache-remove build-remove
 
 #* Service targets
 .PHONY: grep-todos
 grep-todos:
 	git grep -EIn "TODO|FIXME|XXX"
+
+#* Application targets
+.PHONY: app-start
+app-start:
+	bash scripts/app_start.sh

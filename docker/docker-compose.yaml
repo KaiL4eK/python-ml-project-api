@@ -1,0 +1,60 @@
+services:
+  ml-api-server:
+    image: ml-api-server:latest
+    build:
+      # Build from root
+      context: ../
+      dockerfile: docker/Dockerfile
+    command: /run-main-app.sh
+    ports:
+      - "${ML_API_SERVER_PORT:-8080}:8080"
+    depends_on:
+      - redis
+    environment:
+      ML_API_SERVER_CELERY_BROKER_URL: ${ML_API_SERVER_CELERY_BROKER_URL}
+      ML_API_SERVER_CELERY_RESULT_BACKEND: ${ML_API_SERVER_CELERY_RESULT_BACKEND}
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  ml-api-worker:
+    image: ml-api-server:latest
+    command: /run-celery-worker.sh
+    depends_on:
+      - ml_api_server
+      - redis
+    environment:
+      ML_API_SERVER_CELERY_BROKER_URL: ${ML_API_SERVER_CELERY_BROKER_URL}
+      ML_API_SERVER_CELERY_RESULT_BACKEND: ${ML_API_SERVER_CELERY_RESULT_BACKEND}
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  celery-flower:
+    image: ml-api-server:latest
+    command: /run-celery-flower.sh
+    ports:
+      - 5557:5555
+    depends_on:
+      - redis
+    environment:
+      ML_API_SERVER_CELERY_BROKER_URL: ${ML_API_SERVER_CELERY_BROKER_URL}
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+  redis:
+    image: redis:7.4-alpine
+    volumes:
+      - "redis_data:/data"
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+volumes:
+  redis_data:
+    driver: local
