@@ -54,15 +54,31 @@ This is sample ML Project API using [fastapi](https://fastapi.tiangolo.com/) and
 
 ## How to run server
 
+### Docker run
+
 - Create `.env` file from [`.env.example`](.env.example)
+- Run app in docker mode
+```bash
+make app-docker-start-dev
+```
+
+> Dev mode (`-dev` suffix) contains `--reload` in script and override of volumes in compose so you can edit files on your machine and service inside container will reload
+
+> Server is exposed on 8080 port
+
+> Swagger URL http://127.0.0.1:8080/api/v1/docs
 
 ### Local run
 
+> This way you can run server itself on your machine on port 5000
+
+- Create `.env.local` file from [`.env.example`](.env.example)
+  - It has to contain addresses of `localhost` instead of `redis` as we are going to connect outside Docker network
 - Run locally main process
 ```bash
 make app-start
 ```
 - [Optionally] Run Redis and Worker processes in docker in another terminal
 ```bash
-docker compose -f docker/docker-compose.yaml up
+make app-docker-start-dev
 ```

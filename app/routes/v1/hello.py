@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from services.hello import say_hello
+from app.services.hello import say_hello
 
 router = APIRouter()
 

@@ -1,20 +1,13 @@
-import os
 import logging
-from threading import Thread
-from typing import Dict
 
 from fastapi import FastAPI
 
-from app.worker.celery_main import app as celery_app
-from settings import ServerSettings
+from app.core.settings import ServerSettings
 from app.routes.v1 import api as api_v1
 
+logger = logging.getLogger(__name__)
 
-
-log = logging.getLogger(__name__)
-
-settings = ServerSettings()
+settings = ServerSettings()  # type: ignore[call-arg]
 
 app = FastAPI(root_path=settings.root_path)
-
 app.mount("/v1", api_v1)

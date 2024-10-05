@@ -1,14 +1,12 @@
-
-from typing import Optional
-from pydantic import BaseModel
 from enum import Enum
 
 import numpy as np
+from pydantic import BaseModel, Field
 
 
-def PredictionDataInput(BaseModel):
-    feature1: float
-    feature2: float
+class PredictionDataInput(BaseModel):
+    feature1: float = Field(examples=[1.0])
+    feature2: float = Field(examples=[2.0])
 
     def get_np_array(self):
         return np.array(
@@ -16,32 +14,31 @@ def PredictionDataInput(BaseModel):
                 [
                     self.feature1,
                     self.feature2,
-                ]
-            ]
+                ],
+            ],
         )
 
 
-def PredictionResultData(BaseModel):
+class PredictionResultData(BaseModel):
     prediction: int
 
 
-def PredictionErrorData(BaseModel):
+class PredictionErrorData(BaseModel):
     msg: str
 
 
-
-def PreditionStartSuccess(BaseModel):
+class PreditionStartSuccess(BaseModel):
     task_id: str
 
 
-def PredictionStatus(Enum):
+class PredictionStatus(Enum):
+    UNKNOWN = "UNKNOWN"
     RUNNING = "RUNNING"
     COMPLETED = "COMPLETED"
     FAILED = "FAILED"
 
 
-
-def PredictionResultResponse(BaseModel):
-    result: Optional[PredictionResultData]
-    error: Optional[PredictionErrorData]
+class PredictionResultResponse(BaseModel):
+    result: PredictionResultData | None = None
+    error: PredictionErrorData | None = None
     status: PredictionStatus

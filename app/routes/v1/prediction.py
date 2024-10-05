@@ -1,41 +1,45 @@
 from fastapi import APIRouter, HTTPException
 
-from models.prediction import PredictionDataInput, PredictionResultResponse, PredictionStatus, PredictionResultData
-from services.prediction import make_sync_predict
+from app.models.prediction import (
+    PredictionDataInput,
+    PredictionResultResponse,
+    PredictionStatus,
+    PreditionStartSuccess,
+)
+from app.services.prediction import (
+    get_async_predict_status_or_result,
+    make_sync_predict,
+    start_async_predict,
+)
 
 router = APIRouter()
 
 
-@router.post(
-    "/sync",
-    response_model=PredictionResultResponse,
-)
-def predict_sync(data: PredictionDataInput):
+@router.post("/synchronous")
+def predict_sync(data: PredictionDataInput) -> PredictionResultResponse:
     if not data:
-        raise HTTPException(status_code=404, detail="'data_input' argument invalid!")
+        raise HTTPException(status_code=404, detail="'data' argument invalid!")
 
-    data_np = data.get_np_array()
-    predict_value = make_sync_predict(data_np)
+    predict_data = make_sync_predict(data)
 
     return PredictionResultResponse(
-        result=PredictionResultData(
-            prediction=predict_value
-        ),
-        status=PredictionStatus.COMPLETED
+        result=predict_data,
+        status=PredictionStatus.COMPLETED,
     )
 
 
+@router.post("/start")
+def predict_start(data: PredictionDataInput) -> PreditionStartSuccess:
+    if not data:
+        raise HTTPException(status_code=404, detail="'data_input' argument invalid!")
 
-# @router.post("/start")
-# def predict_start(data: PredictionDataInput) -> PreditionStartSuccess:
-#     if not data:
-#         raise HTTPException(status_code=404, detail="'data_input' argument invalid!")
+    task_id = start_async_predict(data)
 
-#     data_np = data.get_np_array()
-
-
-#     return {"task_id": ...}
+    return PreditionStartSuccess(task_id=task_id)
 
 
-# @router.get("/status/{task_id}")
-# def predict_status(task_id: str) -> PredictionResultResponse:
+@router.get("/status/{task_id}")
+def predict_status(task_id: str) -> PredictionResultResponse:
+    response = get_async_predict_status_or_result(task_id)
+
+    return response

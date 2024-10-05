@@ -76,4 +76,8 @@ grep-todos:
 #* Application targets
 .PHONY: app-start
 app-start:
-	bash scripts/app_start.sh
+	bash scripts/app-local-start.sh
+
+.PHONY: app-docker-start-dev
+app-docker-start-dev:
+	bash scripts/app-docker-start-dev.sh

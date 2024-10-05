@@ -1,0 +1,10 @@
+services:
+  ml-api-server:
+    volumes:
+      - ${PWD}/app:/code/app:ro
+      - ${PWD}/config/local:/code/config:ro
+    command: /run-main-app-dev.sh
+
+  redis:
+    ports:
+      - 6379:6379
