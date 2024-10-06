@@ -2,6 +2,8 @@ import logging
 
 from celery.states import PENDING
 
+from app.celery import get_async_result
+from app.celery.prediction.tasks import predict_task
 from app.models.prediction import (
     PredictionDataInput,
     PredictionErrorData,
@@ -9,8 +11,6 @@ from app.models.prediction import (
     PredictionResultResponse,
     PredictionStatus,
 )
-from app.worker import get_async_result
-from app.worker.prediction.tasks import predict_task
 from python_ml_project_api.prediction import predict
 
 logger = logging.getLogger(__name__)

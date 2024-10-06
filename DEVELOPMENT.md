@@ -12,6 +12,9 @@ This is guide how to prepare development environment and use main tools
     - [Cloned existing project](#cloned-existing-project)
   - [Optional setup steps](#optional-setup-steps)
   - [Some known issues](#some-known-issues)
+  - [How to run server for development](#how-to-run-server-for-development)
+    - [Docker run](#docker-run)
+    - [Local run](#local-run)
 
 ## Prerequisites
 
@@ -107,5 +110,39 @@ make project-init
     ```
 
     Check version of your `python3` binary and make sure you have python3.9 installed.
+
+[Table of contents](#table-of-contents)
+
+
+## How to run server for development
+
+### Docker run
+
+- Create `.env` file from [`.env.example`](.env.example)
+- Run app in docker mode
+```bash
+make app-docker-start-dev
+```
+
+> Dev mode (`-dev` suffix) contains `--reload` in script and override of volumes in compose so you can edit files on your machine and service inside container will reload
+
+> Server is exposed on 8080 port
+
+> Swagger URL http://127.0.0.1:8080/api/v1/docs
+
+### Local run
+
+> This way you can run server itself on your machine on port 5000
+
+- Create `.env.local` file from [`.env.example`](.env.example)
+  - It has to contain addresses of `localhost` instead of `redis` as we are going to connect outside Docker network
+- Run locally main process
+```bash
+make app-start
+```
+- [Optionally] Run Redis and Worker processes in docker in another terminal
+```bash
+make app-docker-start-dev
+```
 
 [Table of contents](#table-of-contents)

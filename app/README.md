@@ -10,7 +10,7 @@
   - Here versioning is added, for real production versioning probably you need to version models, services and other parts
 - [services](services) - Main logic/functions code
   - Try to store logic definition here, don`t import your modules in other directories
-- [worker](worker) - Celery gateway/worker definition
+- [celery](celery) - Celery gateway/worker definition
 
 ## Some recomendations
 

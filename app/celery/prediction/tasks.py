@@ -3,8 +3,8 @@ from time import sleep
 import numpy as np
 from celery import Task
 
+from app.celery import app
 from app.models.prediction import PredictionStatus
-from app.worker import app
 from python_ml_project_api.prediction import predict
 
 

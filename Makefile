@@ -44,7 +44,7 @@ nbextention-toc-install:
 #* Tests
 .PHONY: tests
 tests:
-	poetry run pytest -c pyproject.toml
+	poetry run pytest -c pyproject.toml tests
 
 #* Linting
 .PHONY: mypy-install
@@ -78,6 +78,22 @@ grep-todos:
 app-start:
 	bash scripts/app-local-start.sh
 
+#* Docker targets
+
+DOCKER_IMAGE_NAME=ml-api-service
+
+.PHONY: app-docker-build
+app-docker-build:
+
 .PHONY: app-docker-start-dev
-app-docker-start-dev:
-	bash scripts/app-docker-start-dev.sh
+app-docker-start-dev: app-docker-build
+	docker compose \
+		-f docker/docker-compose.yaml \
+		-f docker/docker-compose.dev.yaml \
+		up --build
+
+.PHONY: app-docker-start
+app-docker-start: app-docker-build
+	docker compose \
+		-f docker/docker-compose.yaml \
+		up --build

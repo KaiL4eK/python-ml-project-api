@@ -30,10 +30,8 @@ fastapi = "^0.115.0"
 uvicorn = "^0.31.0"
 celery = "^5.4.0"
 redis = "^5.1.1"
-pydantic = "^2.9.2"
 pydantic-settings = "^2.5.2"
 numpy = "^2.1.0"
-flower = "^2.0.1"
 pyyaml = "^6.0.2"
 
 [tool.poetry.group.dev.dependencies]
@@ -42,7 +40,7 @@ ruff = "^0.6"
 mypy = "^1.8"
 mypy-extensions = "^1.0"
 pre-commit = "^2.14"
-pytest = "^6.2"
+pytest = "^8.3.0"
 watchfiles = "^0.24.0"
 
 [tool.ruff]
@@ -90,6 +88,8 @@ ignore = [
   "D401",
   "RET504",
   "ISC001",
+  # Ruff recommends to remove it when used with formatter
+  "COM812",
   # TODO - enable
   "D10",
 ]

@@ -1,5 +1,6 @@
 services:
   ml-api-server:
+    image: ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG:-latest}
     build:
       # Build from root
       context: ../
@@ -18,10 +19,7 @@ services:
         max-file: "5"
 
   ml-api-worker:
-    build:
-      # Build from root
-      context: ../
-      dockerfile: docker/Dockerfile
+    image: ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG:-latest}
     command: /run-celery-worker.sh
     depends_on:
       - ml-api-server
