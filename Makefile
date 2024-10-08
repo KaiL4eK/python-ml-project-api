@@ -88,12 +88,14 @@ app-docker-build:
 .PHONY: app-docker-start
 app-docker-start: app-docker-build
 	docker compose \
+		--env-file .env \
 		-f docker/docker-compose.yaml \
 		up
 
 .PHONY: app-docker-start-dev
 app-docker-start-dev: app-docker-build
 	docker compose \
+		--env-file .env \
 		-f docker/docker-compose.yaml \
 		-f docker/docker-compose.dev.yaml \
 		up
