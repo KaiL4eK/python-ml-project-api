@@ -56,4 +56,3 @@ services:
 
 volumes:
   redis_data:
-    driver: local

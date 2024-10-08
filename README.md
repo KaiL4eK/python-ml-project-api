@@ -13,10 +13,9 @@ This is sample ML Project API using [fastapi](https://fastapi.tiangolo.com/) and
 
 </div>
 
-- [Project README! Here we go!](#project-readme-here-we-go)
-  - [Repository contents](#repository-contents)
-  - [System requirements](#system-requirements)
-  - [How to run server](#how-to-run-server)
+- [Repository contents](#repository-contents)
+- [System requirements](#system-requirements)
+- [How to run server](#how-to-run-server)
 
 ## Repository contents
 
@@ -60,3 +59,5 @@ make app-docker-start
 ```
 
 > Swagger URL http://127.0.0.1:8080/api/v1/docs
+
+> Flower (Celery dashboard) URL http://127.0.0.1:5555/
