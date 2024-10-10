@@ -1,4 +1,4 @@
-FROM python:3.10.0
+FROM python:3.10-slim-bullseye
 
 # Disable buffering - instant show logs instantly
 ENV PYTHONUNBUFFERED 1
@@ -20,7 +20,7 @@ COPY poetry.lock pyproject.toml scripts/install-poetry.sh poetry.version ./
 RUN pip install --upgrade pip && \
     bash install-poetry.sh && \
     poetry config virtualenvs.create false && \
-    poetry install --only main
+    poetry install --only main --no-root --no-cache
 
 # Copy source code
 COPY ./python_ml_project_api/ ./python_ml_project_api/
