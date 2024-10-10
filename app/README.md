@@ -12,7 +12,7 @@
   - Try to store logic definition here, don`t import your modules in other directories
 - [celery](celery) - Celery gateway/worker definition
 
-## Some recomendations
+## Some recommendations
 
 - Code in `models` and `core` has to contain minimum dependencies
 - `routes` depends on `services`, `worker`, `models`, `core`
