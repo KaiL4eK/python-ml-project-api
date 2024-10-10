@@ -82,6 +82,7 @@ app-start:
 .PHONY: app-docker-build
 app-docker-build:
 	docker compose \
+		--env-file .env \
 		-f docker/docker-compose.yaml \
 		build
 

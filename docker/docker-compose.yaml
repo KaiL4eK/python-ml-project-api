@@ -1,6 +1,6 @@
 services:
   ml-api-server:
-    image: ml-api-service:${DOCKER_IMAGE_TAG:-latest}
+    image: ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG:-latest}
     build:
       # Build from root
       context: ../
@@ -19,7 +19,7 @@ services:
         max-file: "5"
 
   ml-api-worker:
-    image: ml-api-service:${DOCKER_IMAGE_TAG:-latest}
+    image: ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG:-latest}
     command: /run-celery-worker.sh
     depends_on:
       - ml-api-server
