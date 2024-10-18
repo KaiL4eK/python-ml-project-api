@@ -9,7 +9,7 @@ from python_ml_project_api.prediction import predict
 
 
 # bind=True - adds `self` argument to reach task instance
-@app.task(acks_late=True, bind=True)
+@app.task(acks_late=True, bind=True, track_started=True)
 def predict_task(self: Task, data: dict[str, float]) -> int:
     stages = ["preprocessing", "make prediction", "postprocessing", "formatting"]
 
