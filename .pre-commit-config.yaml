@@ -1,4 +1,4 @@
-default_stages: [commit, push]
+default_stages: [pre-commit, pre-push]
 # Fast fail - drop when first error appears
 # Used with nbstripout to restart right after cleaning
 # Because notebooks after cleaning are not indexed, we need to restart commit
@@ -8,13 +8,13 @@ repos:
   # Use this first to fail (clean) on the first step
   #   and restart right after that
   - repo: https://github.com/kynan/nbstripout
-    rev: 0.7.1
+    rev: 0.8.1
     hooks:
       - id: nbstripout
 
   # List of all hooks: https://pre-commit.com/hooks.html
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.6.0
+    rev: v5.0.0
     hooks:
       - id: check-yaml
       - id: check-toml
@@ -45,7 +45,6 @@ repos:
     # E.g. you use formatter to format during development
     #   and pre-commit can behave in a different way without local version
     hooks:
-
       # Run the ruff linter.
       # Source: https://github.com/astral-sh/ruff-pre-commit/blob/main/.pre-commit-hooks.yaml
       - id: ruff

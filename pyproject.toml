@@ -36,10 +36,10 @@ pyyaml = "^6.0.2"
 
 [tool.poetry.group.dev.dependencies]
 # In case of packages without patch part we just want to update them through minor versions
-ruff = "^0.6"
+ruff = "^0.8"
 mypy = "^1.8"
 mypy-extensions = "^1.0"
-pre-commit = "^2.14"
+pre-commit = "^4.0.1"
 pytest = "^8.3.0"
 watchfiles = "^0.24.0"
 
